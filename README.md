@@ -23,10 +23,8 @@ conda install -y pytorch=1.10.1 torchvision=0.11.2 torchaudio=0.10.1 cudatoolkit
  Finally, after the backend is installed, you can install FederatedScope from source:
 ```
  pip install .
-
 ```
 Now, you have successfully installed the minimal version of FederatedScope. For application version including graph run:
-
 ```
 conda install -y pyg==2.0.4 -c pyg
 conda install -y rdkit=2021.09.4=py39hccf6a74_0 -c conda-forge
@@ -37,7 +35,6 @@ After all the above steps are completed, you can run
 ```
 #pwd PATH/TO/FeddepWithEM
 python ./federatedscope/main.py --cfg federatedscope/gfl/feddep/feddep_on_cora5.yaml
-
 ```
 # Tips
 If you encouter a problem of the version of scipy, just use 
