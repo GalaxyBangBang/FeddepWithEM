@@ -1,0 +1,57 @@
+use_gpu: True
+device: 0
+
+federate:
+  mode: standalone
+  make_global_eval: True
+  client_num: 5
+  total_round_num: 200
+  method: feddep
+train:
+  batch_or_epoch: epoch
+data:
+  root: data/
+  type: 'cora'
+  splitter: 'louvain'
+dataloader:
+  type: pyg
+  batch_size: 32
+  sizes: [5,5]
+
+model:
+  type: 'feddep_f'
+  hidden: 128
+  dropout: 0.5
+  out_channels: 7
+  in_channels: 128 # emb_len
+
+feddep:
+  cluster_batch_size: 32
+  ae_pretrained_epochs: 2
+  ae_finetune_epochs: 3
+  dec_epochs: 5
+  num_proto: 5
+  num_pred: 5
+  gen_hidden: 128
+  hide_portion: 0.5
+  feddep_epoch: 30
+  loc_epoch: 10
+  beta_d: 1.0
+  beta_n: 1.0
+  beta_c: 1.0
+  encoder:
+    type: 'feddep_encoder'
+    hidden: 128
+    L: 2
+    batch_size: 32
+    dropout: 0.5
+    out_channels: 7
+    epochs: 50
+
+criterion:
+  type: 'CrossEntropyLoss'
+trainer:
+  type: nodefullbatch_trainer
+
+eval:
+  metrics: ['acc', 'correct']
